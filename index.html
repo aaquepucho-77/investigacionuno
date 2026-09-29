@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Incidencia del conocimiento disciplinar práctico-teórico en la didáctica digital técnico-productiva</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #0c171d;
+    --paper-deep: #1b2e36;
+    --paper-line: #2e4a54;
+    --navy: #070f14;
+    --navy-2: #142530;
+    --navy-3: #1a2f38;
+    --ink: #edf2f2;
+    --ink-soft: #b6c3c6;
+    --ink-faint: #86999e;
+    --brass: #cf9a4c;
+    --brass-deep: #d7a556;
+    --brass-pale: #f0dfb8;
+    --on-navy: #edf2f2;
+    --on-navy-soft: #aebfc4;
+    --line-on-navy: #2e4a54;
+    --card-bg: #17282f;
+    --grid-size: 40px;
+    --font-display: 'Space Grotesk', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --font-body: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  :root[data-theme="light"] {
+    --paper: #eef2f2;
+    --paper-deep: #e3eaea;
+    --paper-line: #c7d5d6;
+    --navy: #12222b;
+    --navy-2: #1c3542;
+    --navy-3: #24404f;
+    --ink: #16242b;
+    --ink-soft: #4c5c63;
+    --ink-faint: #7c8a8f;
+    --brass: #b9812e;
+    --brass-deep: #8c611d;
+    --brass-pale: #ecdcb9;
+    --on-navy: #eef2f2;
+    --on-navy-soft: #a9bcc2;
+    --line-on-navy: #35505c;
+    --card-bg: #f7f9f8;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: calc(64px + env(safe-area-inset-top, 0px)); }
+  body {
+    margin: 0;
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    background:
+      repeating-linear-gradient(0deg, transparent, transparent calc(var(--grid-size) - 1px), var(--paper-line) var(--grid-size)),
+      repeating-linear-gradient(90deg, transparent, transparent calc(var(--grid-size) - 1px), var(--paper-line) var(--grid-size)),
+      var(--paper);
+    background-attachment: fixed;
+  }
+  img, svg { max-width: 100%; }
+  h1, h2, h3 { font-family: var(--font-display); color: var(--ink); margin: 0; }
+  a { color: inherit; }
+  .wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+  .prose { max-width: 68ch; }
+
+  /* ---------- Nav ---------- */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: var(--navy);
+    border-bottom: 1px solid var(--line-on-navy);
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+  .nav-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 12px 28px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-inner::-webkit-scrollbar { display: none; }
+  .nav-mark {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--on-navy);
+    font-size: 0.92rem;
+    white-space: nowrap;
+    padding-right: 14px;
+    border-right: 1px solid var(--line-on-navy);
+    margin-right: 2px;
+  }
+  .nav a.nav-link {
+    color: var(--on-navy-soft);
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-size: 0.88rem;
+    white-space: nowrap;
+    padding: 6px 2px;
+    border-bottom: 2px solid transparent;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .nav a.nav-link:hover { color: var(--on-navy); border-color: var(--brass); }
+
+  /* ---------- Hero / Portada ---------- */
+  .hero {
+    background:
+      radial-gradient(1200px 500px at 15% -10%, rgba(185,129,46,0.16), transparent 60%),
+      repeating-linear-gradient(0deg, transparent, transparent calc(var(--grid-size) - 1px), var(--line-on-navy) var(--grid-size)),
+      repeating-linear-gradient(90deg, transparent, transparent calc(var(--grid-size) - 1px), var(--line-on-navy) var(--grid-size)),
+      var(--navy);
+    color: var(--on-navy);
+    padding: 64px 0 72px;
+  }
+  .motto {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    margin-bottom: 56px;
+  }
+  .motto-mark {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 2rem;
+    line-height: 1.2;
+    color: var(--brass-pale);
+  }
+  .motto-mark svg { flex-shrink: 0; }
+  .motto-source {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--on-navy-soft);
+    padding-left: 50px;
+  }
+  .eyebrow {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: 0.82rem;
+    color: var(--brass-pale);
+    background: rgba(185,129,46,0.14);
+    border: 1px solid rgba(185,129,46,0.4);
+    padding: 6px 12px;
+    border-radius: 3px;
+    margin-bottom: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background .15s ease, border-color .15s ease;
+  }
+  .eyebrow:hover { background: rgba(185,129,46,0.24); border-color: var(--brass); }
+  .hero h1 {
+    font-size: clamp(3.6rem, 8.4vw, 6.3rem);
+    line-height: 1.06;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    max-width: 18ch;
+    margin-bottom: 20px;
+  }
+  .hero-sub {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    color: var(--on-navy-soft);
+    max-width: 56ch;
+    margin-bottom: 8px;
+  }
+  .hero-tag {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--brass-pale);
+  }
+
+  /* ---------- Investigator card ---------- */
+  .investigator {
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--line-on-navy);
+    background: var(--navy-2);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .investigator-main {
+    padding: 30px 32px;
+    border-right: 1px solid var(--line-on-navy);
+  }
+  .investigator-label {
+    font-family: var(--font-display);
+    font-size: 0.76rem;
+    color: var(--on-navy-soft);
+    margin-bottom: 10px;
+  }
+  .investigator-name {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--on-navy);
+    margin-bottom: 6px;
+  }
+  .investigator-role {
+    color: var(--on-navy-soft);
+    font-size: 0.98rem;
+  }
+  .investigator-extra {
+    padding: 30px 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px 20px;
+  }
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .field-label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.02em;
+    color: var(--on-navy-soft);
+  }
+  .field-value {
+    font-size: 0.94rem;
+    color: var(--on-navy);
+  }
+  .field-value.pending {
+    color: var(--on-navy-soft);
+    font-style: italic;
+  }
+  @media (max-width: 760px) {
+    .investigator { grid-template-columns: 1fr; }
+    .investigator-main { border-right: none; border-bottom: 1px solid var(--line-on-navy); }
+    .investigator-extra { grid-template-columns: 1fr; }
+  }
+
+  /* ---------- Section shell ---------- */
+  section.block { padding: 68px 0; border-bottom: 1px solid var(--paper-line); }
+  section.block:last-of-type { border-bottom: none; }
+  .block-head { margin-bottom: 34px; }
+  .block-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    color: var(--brass-deep);
+    margin-bottom: 8px;
+  }
+  .block-head h2 {
+    font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+    font-weight: 600;
+    max-width: 30ch;
+  }
+
+  /* ---------- Research line diagram ---------- */
+  .line-tree { display: flex; flex-direction: column; gap: 10px; }
+  .line-node.root .line-box { background: var(--navy); color: var(--on-navy); font-weight: 600; }
+  .line-group { margin-left: 24px; display: flex; flex-direction: column; gap: 8px; border-left: 1px solid var(--paper-line); padding-left: 24px; }
+  .sub-group { margin-left: 44px; display: flex; flex-direction: column; gap: 8px; }
+  .line-box {
+    flex: 1;
+    padding: 14px 18px;
+    border: 1px solid var(--paper-line);
+    border-radius: 3px;
+    background: var(--card-bg);
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+  }
+  .line-box.dim { opacity: 0.55; }
+  .line-box.active {
+    border-color: var(--brass);
+    background: linear-gradient(0deg, rgba(207,154,76,0.16), rgba(207,154,76,0.16)), var(--card-bg);
+    color: var(--ink);
+    font-weight: 600;
+    box-shadow: inset 3px 0 0 var(--brass);
+  }
+  .line-box .line-label { font-family: var(--font-display); font-size: 0.7rem; color: var(--brass-deep); display: block; margin-bottom: 3px; font-weight: 600; }
+  .line-box.dim .line-label { color: var(--ink-faint); }
+
+  /* ---------- Problem / objectives ---------- */
+  .title-repeat {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.3rem, 2.6vw, 1.8rem);
+    line-height: 1.28;
+    max-width: 34ch;
+    padding: 22px 0 22px 22px;
+    border-left: 3px solid var(--brass);
+    margin-bottom: 44px;
+  }
+  .problem-card {
+    background: var(--card-bg);
+    border: 1px solid var(--paper-line);
+    border-left: 4px solid var(--brass);
+    border-radius: 4px;
+    padding: 28px 32px;
+    margin-bottom: 32px;
+  }
+  .problem-card .po-heading { margin-bottom: 10px; }
+  .problem-card p { margin: 0; max-width: 68ch; }
+  .objetivo-general {
+    background: var(--navy);
+    color: var(--on-navy);
+    border-radius: 4px;
+    padding: 28px 32px;
+    margin-bottom: 32px;
+  }
+  .objetivo-general .po-heading { color: var(--brass-pale); margin-bottom: 10px; }
+  .objetivo-general p { margin: 0; max-width: 62ch; font-size: 1.05rem; color: var(--on-navy); }
+  .po-heading { font-family: var(--font-display); font-weight: 600; font-size: 1.02rem; color: var(--brass-deep); }
+  .obj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 700px) { .obj-grid { grid-template-columns: 1fr; } }
+  .obj-card {
+    border: 1px solid var(--paper-line);
+    border-radius: 4px;
+    background: var(--card-bg);
+    padding: 18px 20px;
+    display: flex;
+    gap: 14px;
+  }
+  .obj-num { font-family: var(--font-mono); color: var(--brass-deep); flex-shrink: 0; }
+  .obj-card p { margin: 0; font-size: 0.96rem; }
+
+  /* ---------- Conceptual framework table ---------- */
+  .concept-table {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid var(--paper-line);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .concept-col { padding: 26px 28px; }
+  .concept-col + .concept-col { border-left: 1px solid var(--paper-line); }
+  .concept-col.practico { background: var(--card-bg); }
+  .concept-col.teorico { background: var(--navy); color: var(--on-navy); }
+  .concept-col h3 { font-size: 1.05rem; margin-bottom: 14px; }
+  .concept-col.teorico h3 { color: var(--brass-pale); }
+  .concept-col ul { margin: 0; padding-left: 20px; font-size: 0.96rem; }
+  .concept-col.teorico ul { color: var(--on-navy-soft); }
+  .concept-note { margin-top: 22px; font-size: 0.95rem; color: var(--ink-soft); }
+  @media (max-width: 700px) { .concept-table { grid-template-columns: 1fr; } .concept-col + .concept-col { border-left: none; border-top: 1px solid var(--paper-line); } }
+
+  /* ---------- Databases + terminology + search ---------- */
+  .db-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 32px; }
+  .db-chip {
+    display: flex; align-items: center; gap: 10px;
+    border: 1px solid var(--paper-line);
+    border-radius: 30px;
+    padding: 7px 16px 7px 7px;
+    text-decoration: none;
+    color: var(--ink);
+    background: var(--card-bg);
+    font-family: var(--font-display);
+    font-size: 0.86rem;
+    font-weight: 600;
+    transition: border-color .15s ease, transform .1s ease;
+  }
+  .db-chip:hover { border-color: var(--brass); }
+  .db-mark {
+    width: 26px; height: 26px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-weight: 700; font-size: 0.78rem;
+    color: #fff; flex-shrink: 0;
+  }
+  .term-compact { display: flex; flex-direction: column; gap: 10px; margin-bottom: 38px; }
+  .term-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; font-size: 0.92rem; }
+  .term-row .term-cat { font-family: var(--font-display); font-weight: 600; color: var(--brass-deep); flex-shrink: 0; min-width: 165px; }
+  .chip {
+    font-family: var(--font-mono); font-size: 0.78rem;
+    background: var(--paper-deep); padding: 2px 8px; border-radius: 3px;
+    color: var(--ink-soft);
+  }
+
+  .eq-block { margin-bottom: 20px; }
+  .eq-label { font-family: var(--font-display); font-size: 0.9rem; margin-bottom: 8px; }
+  .eq-code {
+    font-family: var(--font-mono);
+    font-size: 0.86rem;
+    background: var(--navy);
+    color: #d9e6ea;
+    padding: 16px 18px;
+    border-radius: 4px;
+    overflow-x: auto;
+    white-space: pre;
+    line-height: 1.55;
+  }
+  .eq-code .hl { color: var(--brass-pale); }
+  .scholar-list { columns: 2; column-gap: 40px; margin-top: 10px; }
+  @media (max-width: 700px) { .scholar-list { columns: 1; } }
+  .scholar-list li { font-family: var(--font-mono); font-size: 0.86rem; margin-bottom: 10px; break-inside: avoid; color: var(--ink-soft); }
+
+  /* ---------- Articles: title buttons + modal ---------- */
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--paper-line);
+    border: 1px solid var(--paper-line);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  @media (max-width: 1000px) { .articles-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 620px) { .articles-grid { grid-template-columns: 1fr; } }
+  .article-btn {
+    all: unset;
+    cursor: pointer;
+    background: var(--card-bg);
+    padding: 22px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 120px;
+    justify-content: space-between;
+  }
+  .article-btn:hover { background: var(--paper-deep); }
+  .article-btn:focus-visible { outline: 2px solid var(--brass); outline-offset: -2px; }
+  .article-num { font-family: var(--font-mono); font-size: 0.72rem; color: var(--brass-deep); }
+  .article-title { font-family: var(--font-display); font-size: 0.98rem; font-weight: 600; line-height: 1.32; }
+  .article-open { font-family: var(--font-mono); font-size: 0.7rem; color: var(--ink-faint); }
+
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(4, 8, 10, 0.78);
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 8vh 20px 40px;
+    z-index: 100;
+    overflow-y: auto;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal-box {
+    background: var(--card-bg);
+    color: var(--ink);
+    max-width: 640px;
+    width: 100%;
+    border-radius: 6px;
+    padding: 32px 34px 30px;
+    position: relative;
+    border: 1px solid var(--paper-line);
+  }
+  .modal-close {
+    all: unset;
+    position: absolute;
+    top: 16px; right: 16px;
+    width: 30px; height: 30px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    color: var(--ink-faint);
+    border: 1px solid var(--paper-line);
+  }
+  .modal-close:hover { color: var(--ink); border-color: var(--brass); }
+  .modal-num { font-family: var(--font-mono); font-size: 0.74rem; color: var(--brass-deep); margin-bottom: 10px; }
+  .modal-title { font-family: var(--font-display); font-weight: 600; font-size: 1.2rem; line-height: 1.35; margin-bottom: 10px; padding-right: 30px; }
+  .modal-meta { font-size: 0.86rem; color: var(--ink-faint); margin-bottom: 4px; }
+  .modal-doi { font-family: var(--font-mono); font-size: 0.76rem; color: var(--ink-faint); margin-bottom: 18px; word-break: break-all; }
+  .modal-doi a { color: var(--brass-deep); text-decoration: none; }
+  .modal-doi a:hover { text-decoration: underline; }
+  .modal-section-label { font-family: var(--font-display); font-weight: 600; font-size: 0.7rem; color: var(--brass-deep); margin-bottom: 5px; letter-spacing: 0.01em; }
+  .modal-resumen { font-size: 0.96rem; color: var(--ink-soft); margin-bottom: 18px; line-height: 1.55; }
+  .modal-problem { font-size: 0.95rem; padding-top: 14px; border-top: 1px solid var(--paper-line); }
+
+  footer {
+    padding: 40px 0 calc(40px + env(safe-area-inset-bottom, 0px));
+    text-align: left;
+    color: var(--ink-faint);
+    font-size: 0.85rem;
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-mark">◆ Investigación TPACK</span>
+    <a class="nav-link" href="#investigador">Investigador</a>
+    <a class="nav-link" href="#linea">Línea de investigación</a>
+    <a class="nav-link" href="#problema">Problema y objetivos</a>
+    <a class="nav-link" href="#marco">Marco conceptual</a>
+    <a class="nav-link" href="#busqueda">Bases de datos y búsqueda</a>
+    <a class="nav-link" href="#articulos">20 artículos</a>
+  </div>
+</nav>
+
+<header class="hero" id="portada">
+  <div class="wrap">
+    <div class="motto">
+      <span class="motto-mark">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none">
+          <path d="M3 13c3-6 8-8 12-6 3 1.5 4 4 4 6s-2 5-5 5c-2 0-3-1-3-2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+          <circle cx="17" cy="8" r="1.4" fill="currentColor"/>
+        </svg>
+        El pájaro sale del huevo; el huevo es el mundo.
+      </span>
+      <span class="motto-source">— H. Hesse, <em>Demian</em></span>
+    </div>
+
+    <a class="eyebrow" href="https://fce.unsa.edu.pe/competencias-de-especialidad-informatica-educativa/" target="_blank" rel="noopener">Programa de Informática Educativa · UNSA</a>
+    <h1>Incidencia del conocimiento disciplinar práctico-teórico de los docentes en la implementación de didácticas digitales en la enseñanza técnico-productiva</h1>
+    <p class="hero-sub">Un estudio sobre cómo el dominio disciplinar del docente —lo que sabe hacer y lo que sabe explicar— condiciona su forma de enseñar con tecnología en contextos técnico-productivos.</p>
+    <p class="hero-tag">Línea 1 — Pedagogía y Didáctica · Sub-línea 2 — Didáctica digital y tecnologías emergentes</p>
+
+    <div class="investigator" id="investigador">
+      <div class="investigator-main">
+        <div class="investigator-label">Investigador</div>
+        <div class="investigator-name">Alex Álvaro Aquepucho Sonco</div>
+        <div class="investigator-role">Estudiante de Informática Educativa<br>Facultad de Ciencias de la Educación — Universidad Nacional de San Agustín de Arequipa</div>
+      </div>
+      <div class="investigator-extra">
+        <div class="field">
+          <span class="field-label">ASESOR(A)</span>
+          <span class="field-value pending">— por definir —</span>
+        </div>
+        <div class="field">
+          <span class="field-label">CICLO / SEMESTRE</span>
+          <span class="field-value pending">— por definir —</span>
+        </div>
+        <div class="field">
+          <span class="field-label">CORREO DE CONTACTO</span>
+          <span class="field-value pending">— por definir —</span>
+        </div>
+        <div class="field">
+          <span class="field-label">FECHA / VERSIÓN</span>
+          <span class="field-value pending">— por definir —</span>
+        </div>
+        <div class="field">
+          <span class="field-label">ORCID / REPOSITORIO</span>
+          <span class="field-value pending">— por definir —</span>
+        </div>
+        <div class="field">
+          <span class="field-label">PALABRAS CLAVE</span>
+          <span class="field-value pending">— por definir —</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="block" id="linea">
+  <div class="wrap">
+    <div class="block-head">
+      <div class="block-kicker">Ubicación institucional</div>
+      <h2>Línea y sub-línea de investigación</h2>
+    </div>
+    <div class="line-tree">
+      <div class="line-node root">
+        <div class="line-box">Programa de Informática Educativa — Líneas de investigación</div>
+      </div>
+      <div class="line-group">
+        <div class="line-box active">
+          <span class="line-label">Línea 1</span>
+          Pedagogía y Didáctica
+        </div>
+        <div class="sub-group">
+          <div class="line-box dim"><span class="line-label">Sub-línea 1</span>Evaluación de entornos virtuales de aprendizaje (EVA)</div>
+          <div class="line-box active"><span class="line-label">Sub-línea 2 — esta investigación</span>Didáctica digital y tecnologías emergentes</div>
+          <div class="line-box dim"><span class="line-label">Sub-línea 3</span>Evaluación de competencias digitales docentes y estudiantiles</div>
+        </div>
+        <div class="line-box dim" style="margin-top:10px;">
+          <span class="line-label">Línea 2</span>
+          Políticas y Gestión Educativa — gobernanza digital, inclusión digital, innovación curricular
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="problema">
+  <div class="wrap">
+    <div class="title-repeat">Incidencia del conocimiento disciplinar práctico-teórico de los docentes en la implementación de didácticas digitales en la enseñanza técnico-productiva</div>
+
+    <div class="problem-card">
+      <div class="po-heading">Planteamiento del problema</div>
+      <p>La incorporación de tecnologías emergentes en la didáctica de cursos técnicos —simulación, diseño asistido, control remoto de sistemas automatizados— exige que el docente domine tanto la práctica de campo como los fundamentos teóricos de su especialidad. Sin ese doble dominio, la adopción de herramientas digitales corre el riesgo de quedar en un uso superficial, sin verdadero valor didáctico. No se ha estudiado cómo el nivel de conocimiento disciplinar práctico-teórico del docente condiciona la calidad o profundidad de las estrategias didácticas digitales que implementa.</p>
+    </div>
+
+    <div class="objetivo-general">
+      <div class="po-heading">Objetivo general</div>
+      <p>Analizar cómo el conocimiento disciplinar práctico-teórico de los docentes de una especialidad técnica incide en la implementación de didácticas digitales en su enseñanza.</p>
+    </div>
+
+    <div class="po-heading" style="margin-bottom:14px;">Objetivos específicos</div>
+    <div class="obj-grid">
+      <div class="obj-card"><span class="obj-num">01</span><p>Identificar el nivel de conocimiento disciplinar práctico y teórico de los docentes.</p></div>
+      <div class="obj-card"><span class="obj-num">02</span><p>Describir las estrategias didácticas digitales que implementan actualmente en su enseñanza.</p></div>
+      <div class="obj-card"><span class="obj-num">03</span><p>Analizar la relación entre el nivel de conocimiento disciplinar dual y la profundidad de las estrategias didácticas digitales empleadas.</p></div>
+      <div class="obj-card"><span class="obj-num">04</span><p>Proponer lineamientos para fortalecer la didáctica digital a partir del conocimiento disciplinar identificado.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="marco">
+  <div class="wrap">
+    <div class="block-head">
+      <div class="block-kicker">Marco conceptual</div>
+      <h2>Conocimiento disciplinar dual</h2>
+    </div>
+    <div class="concept-table">
+      <div class="concept-col practico">
+        <h3>Disciplinar práctico / empírico / de campo</h3>
+        <ul>
+          <li>Manejo de maquinaria y herramientas</li>
+          <li>Diseño técnico</li>
+          <li>Modelado y diseño 3D</li>
+          <li>Procesos de transformación (p. ej. procesamiento de alimentos)</li>
+          <li>Sistemas de cultivo automatizado</li>
+        </ul>
+      </div>
+      <div class="concept-col teorico">
+        <h3>Disciplinar teórico</h3>
+        <ul>
+          <li>Matemática</li>
+          <li>Física</li>
+          <li>Química</li>
+          <li>Pensamiento algorítmico</li>
+        </ul>
+      </div>
+    </div>
+    <p class="concept-note prose">Ambas dimensiones son necesarias y probablemente interactúan: el conocimiento teórico sin destreza práctica no basta para "hacer" —saber física de fluidos sin saber calibrar un sistema de riego automatizado—, y la destreza práctica sin base teórica limita la capacidad de adaptar, diagnosticar fallas o innovar. El antecedente teórico más cercano es el PCK de Shulman y su extensión TPACK, que no separan explícitamente lo disciplinar en una subdimensión práctica y otra teórica —el aporte diferenciador de esta investigación.</p>
+  </div>
+</section>
+
+<section class="block" id="busqueda">
+  <div class="wrap">
+    <div class="block-head">
+      <div class="block-kicker">Fuentes, terminología y ecuaciones</div>
+      <h2>Bases de datos y búsqueda bibliográfica</h2>
+    </div>
+
+    <div class="db-row">
+      <a class="db-chip" href="https://www.scopus.com" target="_blank" rel="noopener">
+        <span class="db-mark" style="background:#B5451E;">S</span> Scopus
+      </a>
+      <a class="db-chip" href="https://www.webofscience.com/" target="_blank" rel="noopener">
+        <span class="db-mark" style="background:#2F5D82;">W</span> Web of Science
+      </a>
+      <a class="db-chip" href="https://scholar.google.com" target="_blank" rel="noopener">
+        <span class="db-mark" style="background:#3B6E45;">G</span> Google Académico
+      </a>
+      <a class="db-chip" href="https://www.researchrabbit.ai" target="_blank" rel="noopener">
+        <span class="db-mark" style="background:#8C611D;">R</span> ResearchRabbit
+      </a>
+    </div>
+
+    <div class="term-compact">
+      <div class="term-row"><span class="term-cat">Disciplinar teórico</span><span class="chip">content knowledge</span><span class="chip">subject matter knowledge</span><span class="chip">disciplinary knowledge</span></div>
+      <div class="term-row"><span class="term-cat">Disciplinar práctico</span><span class="chip">practical knowledge</span><span class="chip">technical knowledge</span><span class="chip">craft knowledge</span><span class="chip">procedural knowledge</span></div>
+      <div class="term-row"><span class="term-cat">Didáctica digital</span><span class="chip">digital didactics</span><span class="chip">technology integration</span><span class="chip">educational technology</span></div>
+      <div class="term-row"><span class="term-cat">Educación técnica</span><span class="chip">technical education</span><span class="chip">vocational education</span><span class="chip">TVET</span></div>
+      <div class="term-row"><span class="term-cat">Marco teórico</span><span class="chip">PCK (Shulman)</span><span class="chip">TPACK</span></div>
+    </div>
+
+    <div class="eq-block">
+      <div class="eq-label">Bloque 1 — Conocimiento disciplinar docente</div>
+      <div class="eq-code">(<span class="hl">"content knowledge"</span> OR <span class="hl">"subject matter knowledge"</span> OR <span class="hl">"disciplinary knowledge"</span> OR <span class="hl">"teacher expertise"</span>) AND (<span class="hl">"practical knowledge"</span> OR <span class="hl">"technical knowledge"</span> OR <span class="hl">"procedural knowledge"</span> OR <span class="hl">"craft knowledge"</span>)</div>
+    </div>
+    <div class="eq-block">
+      <div class="eq-label">Bloque 2 — Aplicado a educación técnica</div>
+      <div class="eq-code">(<span class="hl">"technical education"</span> OR <span class="hl">"vocational education"</span> OR <span class="hl">"TVET"</span> OR <span class="hl">"technical-vocational"</span>) AND (<span class="hl">"teacher knowledge"</span> OR <span class="hl">"content knowledge"</span> OR <span class="hl">"teacher competence"</span>)</div>
+    </div>
+    <div class="eq-block">
+      <div class="eq-label">Bloque 3 — Conocimiento disciplinar + didáctica digital (foco de esta investigación)</div>
+      <div class="eq-code">(<span class="hl">"content knowledge"</span> OR <span class="hl">"disciplinary knowledge"</span>) AND (<span class="hl">"digital didactics"</span> OR <span class="hl">"technology integration"</span> OR <span class="hl">"educational technology"</span>) AND teacher*</div>
+    </div>
+    <div class="eq-block">
+      <div class="eq-label">Bloque 4 — Marco TPACK (referencia obligada)</div>
+      <div class="eq-code">"<span class="hl">TPACK</span>" OR "<span class="hl">Technological Pedagogical Content Knowledge</span>"</div>
+    </div>
+
+    <div class="eq-label" style="margin-top:30px;">Google Académico (frases cortas en español)</div>
+    <ul class="scholar-list">
+      <li>"conocimiento disciplinar" docentes técnicos</li>
+      <li>"dominio del contenido" didáctica digital docente</li>
+      <li>conocimiento práctico teórico docentes educación técnica</li>
+      <li>TPACK educación técnico-productiva</li>
+      <li>"saber hacer" "saber teórico" formación docente técnica</li>
+      <li>idoneidad docente dominio disciplinar tecnologías emergentes</li>
+    </ul>
+  </div>
+</section>
+
+<section class="block" id="articulos">
+  <div class="wrap">
+    <div class="block-head">
+      <div class="block-kicker">Revisión preliminar · 20 referencias con DOI (2021–2025)</div>
+      <h2>Artículos de referencia — clic para ver el detalle</h2>
+    </div>
+    <div class="articles-grid" id="articles-grid"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Documento de trabajo — Programa de Informática Educativa, UNSA. Contenido preparado como insumo para el marco teórico de la investigación.
+  </div>
+</footer>
+
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button class="modal-close" id="modal-close" aria-label="Cerrar">×</button>
+    <div class="modal-num" id="modal-num"></div>
+    <div class="modal-title" id="modal-title"></div>
+    <div class="modal-meta" id="modal-meta"></div>
+    <div class="modal-doi" id="modal-doi"></div>
+    <div class="modal-section-label">Resumen</div>
+    <p class="modal-resumen" id="modal-resumen"></p>
+    <div class="modal-problem">
+      <div class="modal-section-label">Problemática</div>
+      <p id="modal-problem-text" style="margin:0;"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+const articles = [
+  {
+    title: "Competencias digitales en los docentes de educación técnica productiva",
+    authors: "Romero-Arévalo, M.; Guerra-Castellanos, Y. B.",
+    meta: "Revista Arbitrada Interdisciplinaria Koinonía · 2024",
+    doi: "10.35381/r.k.v9i17.3245",
+    resumen: "Estudio en un CETPRO de Trujillo (Perú) sobre la influencia del uso de herramientas tecnológicas en las competencias digitales de docentes técnico-productivos.",
+    problema: "Los docentes técnico-productivos desarrollan sus competencias digitales de forma empírica, ante la falta de formación institucional sistemática."
+  },
+  {
+    title: "Vocational teachers' perspective toward Technological Pedagogical Vocational Knowledge",
+    authors: "Rahmawati, A.; Suryani, N.; Akhyar, M.; Sukarmin, S.",
+    meta: "Open Engineering · 2021",
+    doi: "10.1515/eng-2021-0040",
+    resumen: "Estudio con docentes vocacionales de construcción en Indonesia sobre su Conocimiento Tecnológico, Pedagógico y Vocacional (TPVK).",
+    problema: "El conocimiento vocacional (disciplinar) resultó el componente más débil frente al pedagógico, limitando la integración tecnológica alineada al currículo."
+  },
+  {
+    title: "From TPACK to N-TPACK Framework for Vocational Education and Training",
+    authors: "Torggler, C.; Miesera, S.; Nerdel, C.",
+    meta: "Intl. Journal for Research in VET · 2023",
+    doi: "10.13152/ijrvet.10.2.2",
+    resumen: "Propone el marco N-TPACK, una adaptación de TPACK a la formación técnico-profesional alemana en nutrición y economía doméstica.",
+    problema: "TPACK no recoge las particularidades del sistema VET alemán ni el conocimiento profesional que requieren estos docentes."
+  },
+  {
+    title: "The Pedagogical Knowledge of Technology Education Teachers",
+    authors: "González-Ferro, V. et al.",
+    meta: "Intl. Journal of Educational Methodology · 2024",
+    doi: "10.12973/ijem.10.3.465",
+    resumen: "Estudio cualitativo sobre el conocimiento pedagógico de docentes universitarios de Operación de Plantas e Instrumentación Industrial.",
+    problema: "Las prácticas pedagógicas en programas técnicos de ingeniería siguen siendo expositivas, sin que el conocimiento pedagógico docente esté explicitado."
+  },
+  {
+    title: "Conocimiento tecnológico, pedagógico y disciplinar, y su relación con competencias digitales en docentes de psicología",
+    authors: "Castro Castro, C.; Sánchez Oñate, A.; Bruna Jofré, D.; Fernández Vega, D.",
+    meta: "Actualidades Investigativas en Educación · 2025",
+    doi: "10.15517/qs783m72",
+    resumen: "Estudio correlacional sobre TPACK y competencias digitales en docentes universitarios de psicología en Chile.",
+    problema: "No hay claridad sobre cómo se relacionan las dimensiones del TPACK con las competencias digitales del profesorado en un área humanista."
+  },
+  {
+    title: "Mathematics Teachers' Knowledge for Teaching with Digital Technologies: A Systematic Review",
+    authors: "Padilla-Escorcia, I. A.; García-Rodríguez, M. L.; Aguilar-González, Á.",
+    meta: "Education Sciences · 2025",
+    doi: "10.3390/educsci15121598",
+    resumen: "Revisión sistemática (2010–2025) que compara los marcos TPACK y MTSK en la enseñanza de matemáticas con tecnología.",
+    problema: "TPACK y MTSK abordan de forma fragmentada la dimensión tecnológica y la disciplinar del conocimiento docente."
+  },
+  {
+    title: "Digital competence for sustainable education of pre-service teachers: a systematic literature review",
+    authors: "Zhang, L.; Yang, C.; Zheng, Y.",
+    meta: "Frontiers in Psychology · 2025",
+    doi: "10.3389/fpsyg.2025.1710983",
+    resumen: "Revisión sistemática (2014–2024) sobre la competencia digital de docentes en formación inicial.",
+    problema: "Persisten limitaciones metodológicas y falta de sistematización sobre marcos y métodos de medición de la competencia digital docente."
+  },
+  {
+    title: "How digitalised are vocational teachers?",
+    authors: "Cattaneo, A. A. P.; Antonietti, C.; Rauseo, M.",
+    meta: "Computers & Education · 2022",
+    doi: "10.1016/j.compedu.2021.104358",
+    resumen: "Diagnóstico de competencia digital en 1,692 docentes de formación profesional (VET) suiza.",
+    problema: "Se desconoce con precisión el nivel real de digitalización de los docentes VET y los factores que lo explican."
+  },
+  {
+    title: "An empirical study on the evaluation and influencing factors of digital competence of Chinese teachers for TVET",
+    authors: "Xin, Y.; Tang, Y.; Mou, X.",
+    meta: "PLOS ONE · 2024",
+    doi: "10.1371/journal.pone.0310187",
+    resumen: "Construye y valida un sistema estándar de competencia digital para 2,514 docentes de TVET en China.",
+    problema: "China carece de un sistema estandarizado para medir la competencia digital de sus docentes de TVET."
+  },
+  {
+    title: "How do vocational teachers use technology?",
+    authors: "Cattaneo, A. A. P.; Antonietti, C.; Rauseo, M.",
+    meta: "Vocations and Learning · 2025",
+    doi: "10.1007/s12186-025-09359-4",
+    resumen: "Analiza el uso real de 21 tecnologías educativas por docentes VET suizos según su perfil de enseñanza.",
+    problema: "El uso de tecnologías educativas varía por perfil docente, sin claridad sobre cuánto lo explican la competencia y la utilidad percibidas."
+  },
+  {
+    title: "TPACK Proficiency among Vocational High School Teachers",
+    authors: "Kawet, R. S. S. I.; Mahendra, I. G. B.; Tampang, B. L.; Memah, V. F.",
+    meta: "Journal of Education Technology · 2025",
+    doi: "10.23887/jet.v9i4.102632",
+    resumen: "Compara el dominio del TPACK entre docentes de escuelas vocacionales públicas y privadas en Indonesia.",
+    problema: "La implementación del TPACK es desigual entre instituciones públicas y privadas, condicionada por el apoyo institucional."
+  },
+  {
+    title: "Examining Agricultural Teachers' TPACK Competencies",
+    authors: "Villareal, N. K. B.; Homillano, M. L.",
+    meta: "Asian Journal of Education and Social Studies · 2024",
+    doi: "10.9734/ajess/2024/v50i121692",
+    resumen: "Examina la relación entre características demográficas y niveles de TPACK en docentes de agricultura filipinos.",
+    problema: "El conocimiento de contenido es el más débil del TPACK docente, y decrece con los años de experiencia."
+  },
+  {
+    title: "Development of the teacher's TPACK from the Lesson Study: A systematic review",
+    authors: "Jiménez Sierra, Á. A.; Ortega Iglesias, J. M.; Cabero-Almenara, J.; Palacios-Rodríguez, A.",
+    meta: "Frontiers in Education · 2023",
+    doi: "10.3389/feduc.2023.1078913",
+    resumen: "Revisión sistemática sobre el desarrollo del TPACK docente a través de la metodología Lesson Study.",
+    problema: "Las capacitaciones tecnocéntricas tradicionales no integran bien contenido, pedagogía y tecnología."
+  },
+  {
+    title: "Diagnosis of TPACK in Elementary School Teachers: Colombian Caribbean",
+    authors: "Jiménez Sierra, Á.; Ortega Iglesias, J.; Palacios-Rodríguez, A.",
+    meta: "Education Sciences · 2024",
+    doi: "10.3390/educsci14091013",
+    resumen: "Estudio de caso sobre el TPACK de ocho docentes de primaria del Caribe colombiano tras un programa de Lesson Study.",
+    problema: "El TPACK inicial de estos docentes requiere fortalecerse en un contexto de recursos limitados."
+  },
+  {
+    title: "Evaluation of digital competencies: instrument for vocational teacher training",
+    authors: "Sänger, N.",
+    meta: "Intl. Journal of Vocational Education Studies · 2024",
+    doi: "10.14361/ijves-2024-010203",
+    resumen: "Examina críticamente los enfoques de evaluación de competencias digitales basados en TPACK en formación vocacional.",
+    problema: "Los enfoques actuales presentan limitaciones conceptuales y no existe un instrumento propio para este contexto."
+  },
+  {
+    title: "Teachers' Readiness in Integrating Technology through TPACK-ICT: Papua, Indonesia",
+    authors: "Tanta, T.; Satar, S.; Nurbaya, N.; Listiani, H.",
+    meta: "Jurnal Iqra': Kajian Ilmu Pendidikan · 2025",
+    doi: "10.25217/ji.v10i3.6676",
+    resumen: "Mide el nivel de competencia TPACK-ICT de docentes en la región de Papúa, Indonesia.",
+    problema: "Los docentes muestran menor dominio en conocimiento de contenido y tecnológico que en lo pedagógico."
+  },
+  {
+    title: "Iraqi Kurdish EFL teachers' beliefs about TPACK",
+    authors: "Ali, S. S.; Mohammadzadeh, B.",
+    meta: "Frontiers in Psychology · 2022",
+    doi: "10.3389/fpsyg.2022.969195",
+    resumen: "Examina las creencias sobre TPACK de docentes de inglés kurdo-iraquíes según su experiencia y formación.",
+    problema: "Las creencias sobre el propio conocimiento tecnológico-pedagógico-disciplinar dependen de la experiencia y formación docente."
+  },
+  {
+    title: "Evaluating the effectiveness of a TPACK-based training program",
+    authors: "Diamah, A.; Rahmawati, Y.; Paristiowati, M.; Fitriani, E.; Irwanto, I.; Dobson, S.; Sevilla, D.",
+    meta: "Frontiers in Education · 2022",
+    doi: "10.3389/feduc.2022.897447",
+    resumen: "Evalúa la efectividad de un programa de capacitación basado en TPACK para futuros docentes.",
+    problema: "No hay evidencia suficiente sobre si estos programas mejoran la percepción del propio conocimiento TPACK."
+  },
+  {
+    title: "The Technological-Pedagogical Knowledge for In-Service Teachers in Primary Education: SLR",
+    authors: "Paidicán Soto, M. A.; Arredondo Herrera, P. A.",
+    meta: "Contemporary Educational Technology · 2022",
+    doi: "10.30935/cedtech/11813",
+    resumen: "Revisión sistemática sobre TPACK en docentes de primaria en servicio, a partir de más de 600 artículos identificados.",
+    problema: "La producción científica sobre TPACK en educación primaria es aún muy limitada, aunque creciente."
+  },
+  {
+    title: "Conocimiento técnico pedagógico del contenido (TPACK) en Iberoamérica",
+    authors: "Paidicán, M. A.; Arredondo, P. A.",
+    meta: "Revista Andina de Educación · 2023",
+    doi: "10.32719/26312816.2022.6.2.9",
+    resumen: "Revisión bibliográfica de 22 artículos sobre la producción del modelo TPACK en el contexto iberoamericano.",
+    problema: "La investigación sobre TPACK en Iberoamérica es marginal frente a la producción científica global."
+  }
+];
+
+const grid = document.getElementById('articles-grid');
+grid.innerHTML = articles.map((a, i) => `
+  <button class="article-btn" data-index="${i}" type="button">
+    <span class="article-num">${String(i+1).padStart(2,'0')}</span>
+    <span class="article-title">${a.title}</span>
+    <span class="article-open">Ver detalle →</span>
+  </button>
+`).join('');
+
+const overlay = document.getElementById('modal-overlay');
+const closeBtn = document.getElementById('modal-close');
+let lastFocused = null;
+
+function openModal(i) {
+  const a = articles[i];
+  document.getElementById('modal-num').textContent = String(i+1).padStart(2,'0') + ' / ' + articles.length;
+  document.getElementById('modal-title').textContent = a.title;
+  document.getElementById('modal-meta').textContent = a.authors + ' — ' + a.meta;
+  document.getElementById('modal-doi').innerHTML = 'DOI: <a href="https://doi.org/' + a.doi + '" target="_blank" rel="noopener">doi.org/' + a.doi + '</a>';
+  document.getElementById('modal-resumen').textContent = a.resumen;
+  document.getElementById('modal-problem-text').textContent = a.problema;
+  overlay.classList.add('open');
+  closeBtn.focus();
+}
+function closeModal() {
+  overlay.classList.remove('open');
+  if (lastFocused) lastFocused.focus();
+}
+
+grid.addEventListener('click', (e) => {
+  const btn = e.target.closest('.article-btn');
+  if (!btn) return;
+  lastFocused = btn;
+  openModal(Number(btn.dataset.index));
+});
+closeBtn.addEventListener('click', closeModal);
+overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal(); });
+</script>
+
+</body>
+</html>
