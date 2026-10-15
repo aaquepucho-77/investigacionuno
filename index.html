@@ -407,14 +407,19 @@
   /* ---------- Articles: title buttons + modal ---------- */
   .articles-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 1px;
     background: var(--paper-line);
     border: 1px solid var(--paper-line);
     border-radius: 4px;
     overflow: hidden;
   }
-  @media (max-width: 1000px) { .articles-grid { grid-template-columns: repeat(2, 1fr); } }
+  .articles-grid .article-btn:last-child:nth-child(3n+2) { grid-column: span 2; }
+  @media (max-width: 1000px) {
+    .articles-grid { grid-template-columns: repeat(2, 1fr); }
+    .articles-grid .article-btn:last-child:nth-child(3n+2) { grid-column: auto; }
+    .articles-grid .article-btn:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  }
   @media (max-width: 620px) { .articles-grid { grid-template-columns: 1fr; } }
   .article-btn {
     all: unset;
@@ -447,7 +452,7 @@
   .modal-box {
     background: var(--card-bg);
     color: var(--ink);
-    max-width: 640px;
+    max-width: 720px;
     width: 100%;
     border-radius: 6px;
     padding: 32px 34px 30px;
@@ -476,7 +481,12 @@
   .modal-doi a:hover { text-decoration: underline; }
   .modal-section-label { font-family: var(--font-display); font-weight: 600; font-size: 0.7rem; color: var(--brass-deep); margin-bottom: 5px; letter-spacing: 0.01em; }
   .modal-resumen { font-size: 0.96rem; color: var(--ink-soft); margin-bottom: 18px; line-height: 1.55; }
-  .modal-problem { font-size: 0.95rem; padding-top: 14px; border-top: 1px solid var(--paper-line); }
+  .modal-problem { font-size: 0.95rem; padding-top: 14px; border-top: 1px solid var(--paper-line); margin-bottom: 16px; }
+  .modal-block { font-size: 0.95rem; padding-top: 14px; border-top: 1px solid var(--paper-line); margin-top: 16px; }
+  .modal-block p { margin: 0; }
+  .modal-method { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; padding-top: 14px; border-top: 1px solid var(--paper-line); margin-top: 16px; }
+  .modal-method p { margin: 0; font-size: 0.9rem; color: var(--ink-soft); line-height: 1.5; }
+  @media (max-width: 620px) { .modal-method { grid-template-columns: 1fr; } }
 
   footer {
     padding: 40px 0 calc(40px + env(safe-area-inset-bottom, 0px));
@@ -496,7 +506,7 @@
     <a class="nav-link" href="#problema">Problema y objetivos</a>
     <a class="nav-link" href="#marco">Marco conceptual</a>
     <a class="nav-link" href="#busqueda">Bases de datos y búsqueda</a>
-    <a class="nav-link" href="#articulos">20 artículos</a>
+    <a class="nav-link" href="#articulos">5 artículos</a>
   </div>
 </nav>
 
@@ -672,7 +682,7 @@
 <section class="block" id="articulos">
   <div class="wrap">
     <div class="block-head">
-      <div class="block-kicker">Revisión preliminar · 20 referencias con DOI (2021–2025)</div>
+      <div class="block-kicker">Revisión preliminar · 5 referencias con DOI (2024–2026)</div>
       <h2>Artículos de referencia — clic para ver el detalle</h2>
     </div>
     <div class="articles-grid" id="articles-grid"></div>
@@ -698,170 +708,86 @@
       <div class="modal-section-label">Problemática</div>
       <p id="modal-problem-text" style="margin:0;"></p>
     </div>
+    <div class="modal-section-label">¿Cómo abordan el problema?</div>
+    <p class="modal-resumen" id="modal-solucion" style="margin-bottom:0;"></p>
+    <div class="modal-method">
+      <div><div class="modal-section-label">Enfoque</div><p id="modal-enfoque"></p></div>
+      <div><div class="modal-section-label">Diseño</div><p id="modal-diseno"></p></div>
+      <div><div class="modal-section-label">Instrumento</div><p id="modal-instrumento"></p></div>
+    </div>
+    <div class="modal-block">
+      <div class="modal-section-label">Resultado</div>
+      <p id="modal-resultado"></p>
+    </div>
   </div>
 </div>
 
 <script>
 const articles = [
   {
-    title: "Competencias digitales en los docentes de educación técnica productiva",
-    authors: "Romero-Arévalo, M.; Guerra-Castellanos, Y. B.",
-    meta: "Revista Arbitrada Interdisciplinaria Koinonía · 2024",
-    doi: "10.35381/r.k.v9i17.3245",
-    resumen: "Estudio en un CETPRO de Trujillo (Perú) sobre la influencia del uso de herramientas tecnológicas en las competencias digitales de docentes técnico-productivos.",
-    problema: "Los docentes técnico-productivos desarrollan sus competencias digitales de forma empírica, ante la falta de formación institucional sistemática."
+    "title": "Habilidades del siglo XXI y desarrollo de la fuerza laboral: un cambio de paradigma",
+    "authors": "Cooper, M. M.",
+    "meta": "Journal of Chemical Education · 2026",
+    "doi": "10.1021/acs.jchemed.6c00234",
+    "resumen": "La idea del desarrollo de la fuerza laboral se ha convertido en una prioridad y, como consecuencia, la educación superior debe reconsiderar sus objetivos. Como expertos disciplinares, naturalmente nos centramos en el contenido disciplinar. Sin embargo, en química, la mayoría de nuestros estudiantes no están destinados a carreras químicas, y gran parte del contenido químico que aprenden desempeñará un papel mínimo en su futuro (basta con preguntar a esos médicos que tuvieron que cursar química orgánica). Al mismo tiempo, los resultados y las habilidades que valoran los futuros empleadores normalmente no implican conocimiento de contenido, sino más bien las llamadas habilidades del siglo XXI, como el pensamiento crítico, la resolución de problemas complejos y la comunicación. Esto nos plantea tres cuestiones que nosotros, como educadores de química, debemos abordar: (1) ¿Cómo podemos definir mejor estas habilidades del siglo XXI? (2) ¿Cómo podemos ayudar a los estudiantes a desarrollar estas competencias, dado que no hay evidencia de que enseñar tales habilidades en ausencia de contenido disciplinar tenga éxito? (3) ¿Cómo podemos reunir evidencia convincente de que los estudiantes han alcanzado la competencia en estas habilidades? Estos cambios requerirán que los educadores reconsideren lo que es importante al diseñar los currículos. En lugar de centrarse en qué contenido debe cubrirse, los objetivos de aprendizaje deben enfatizar las habilidades y hábitos mentales que componen las habilidades del siglo XXI, mientras se utiliza el contenido disciplinar como una forma de ayudar a los estudiantes a desarrollar competencias en estas habilidades. Existen varios enfoques que se pueden considerar, incluyendo las prácticas científicas y de ingeniería y el pensamiento sistémico, como indicadores de las habilidades del siglo XXI. Lo importante es que estas habilidades estén bien definidas para que podamos brindar evidencia más convincente de que realmente estamos preparando a los estudiantes para el futuro.",
+    "problema": "La problemática principal es que la educación superior continúa priorizando la enseñanza de contenidos disciplinares y su memorización, en lugar de desarrollar y evaluar adecuadamente las competencias que los estudiantes necesitan para enfrentar los desafíos del mundo laboral.",
+    "solucion": "Su propuesta consiste en cambiar el enfoque de la educación: pasar de priorizar la cantidad de contenidos enseñados a desarrollar habilidades mediante el uso y la aplicación de esos conocimientos.",
+    "enfoque": "Cualitativo, de carácter teórico y analítico.",
+    "diseno": "Artículo de perspectiva (Perspective), basado en la revisión y discusión de literatura científica.",
+    "instrumento": "No se reporta un instrumento de investigación propio.",
+    "resultado": "El principal resultado del artículo es una conclusión argumentativa: para preparar a los estudiantes para el mundo laboral del siglo XXI, la educación debe integrar los conocimientos disciplinares con el desarrollo y la evaluación explícita de competencias."
   },
   {
-    title: "Vocational teachers' perspective toward Technological Pedagogical Vocational Knowledge",
-    authors: "Rahmawati, A.; Suryani, N.; Akhyar, M.; Sukarmin, S.",
-    meta: "Open Engineering · 2021",
-    doi: "10.1515/eng-2021-0040",
-    resumen: "Estudio con docentes vocacionales de construcción en Indonesia sobre su Conocimiento Tecnológico, Pedagógico y Vocacional (TPVK).",
-    problema: "El conocimiento vocacional (disciplinar) resultó el componente más débil frente al pedagógico, limitando la integración tecnológica alineada al currículo."
+    "title": "An empirical study on the evaluation and influencing factors of digital competence of Chinese teachers for TVET",
+    "authors": "Xin, Y.; Tang, Y.; Mou, X.",
+    "meta": "PLOS ONE · 2024",
+    "doi": "10.1371/journal.pone.0310187",
+    "resumen": "Estudio empírico sobre la autopercepción de la competencia digital del profesorado chino de educación técnica y profesional (TVET) mediante un nuevo sistema estándar de evaluación.",
+    "problema": "Ausencia de un sistema de estándares y de diagnóstico claro respecto a la competencia digital de los docentes de Educación Técnica y Profesional (TVET) en China.",
+    "solucion": "Construyen un marco de estándares para TVET (actitud, conocimientos y habilidades digitales) y llevan a cabo una evaluación empírica de sus factores de influencia.",
+    "enfoque": "Cuantitativo.",
+    "diseno": "Empírico-descriptivo y transversal.",
+    "instrumento": "Encuesta estandarizada basada en el nuevo marco de competencias TVET.",
+    "resultado": "Mapeo cuantitativo de fortalezas y debilidades digitales en los docentes chinos de TVET, proporcionando pautas políticas para la transformación digital institucional."
   },
   {
-    title: "From TPACK to N-TPACK Framework for Vocational Education and Training",
-    authors: "Torggler, C.; Miesera, S.; Nerdel, C.",
-    meta: "Intl. Journal for Research in VET · 2023",
-    doi: "10.13152/ijrvet.10.2.2",
-    resumen: "Propone el marco N-TPACK, una adaptación de TPACK a la formación técnico-profesional alemana en nutrición y economía doméstica.",
-    problema: "TPACK no recoge las particularidades del sistema VET alemán ni el conocimiento profesional que requieren estos docentes."
+    "title": "Diagnosis of TPACK in Elementary School Teachers: A Case Study in the Colombian Caribbean",
+    "authors": "Jiménez Sierra, Á.; Ortega Iglesias, J.; Palacios-Rodríguez, A.",
+    "meta": "Education Sciences · 2024",
+    "doi": "10.3390/educsci14091013",
+    "resumen": "Evaluación del TPACK inicial de 8 maestros de primaria de una escuela pública en el Caribe colombiano que participaron en un programa de Estudio de Lecciones.",
+    "problema": "Necesidad de diagnosticar y fortalecer las competencias docentes iniciales en TPACK en escuelas públicas de primaria en contexto de vulnerabilidad en el Caribe colombiano.",
+    "solucion": "Desarrollan una intervención de formación profesional basada en la metodología de Estudio de Lecciones con 8 docentes de primaria para diagnosticar y mejorar su TPACK.",
+    "enfoque": "Cualitativo.",
+    "diseno": "Estudio de caso.",
+    "instrumento": "Entrevistas semiestructuradas, pautas de observación de clase y diarios de campo.",
+    "resultado": "Identificación detallada del nivel inicial del TPACK y demostración de mejoras significativas en la articulación tecnológica tras las fases reflexivas del Estudio de Lecciones."
   },
   {
-    title: "The Pedagogical Knowledge of Technology Education Teachers",
-    authors: "González-Ferro, V. et al.",
-    meta: "Intl. Journal of Educational Methodology · 2024",
-    doi: "10.12973/ijem.10.3.465",
-    resumen: "Estudio cualitativo sobre el conocimiento pedagógico de docentes universitarios de Operación de Plantas e Instrumentación Industrial.",
-    problema: "Las prácticas pedagógicas en programas técnicos de ingeniería siguen siendo expositivas, sin que el conocimiento pedagógico docente esté explicitado."
+    "title": "The evolution and driving mechanism of education inequality in China: From 2003 to 2020",
+    "authors": "Guo, Y.",
+    "meta": "PLOS ONE · 2025",
+    "doi": "10.1371/journal.pone.0314297",
+    "resumen": "Pendiente: la celda de resumen de este artículo en el Excel contiene el abstract de otro estudio (Emerging Engineering Education in China). Reemplazar con el abstract original de este artículo.",
+    "problema": "Persistencia de desigualdades educativas entre las regiones de China.",
+    "solucion": "Analizan la evolución de la educación y los factores económicos, sociales y territoriales que influyen en las desigualdades.",
+    "enfoque": "Cuantitativo, basado en el análisis estadístico de datos.",
+    "diseno": "No experimental, longitudinal y correlacional, con datos provinciales de 2003 a 2020.",
+    "instrumento": "Bases de datos estadísticas e índices educativos; aplican modelos econométricos y análisis espacial.",
+    "resultado": "La educación mejoró en China, pero persisten diferencias entre el este y el oeste. El desarrollo económico y la distribución de recursos influyen en las desigualdades educativas."
   },
   {
-    title: "Conocimiento tecnológico, pedagógico y disciplinar, y su relación con competencias digitales en docentes de psicología",
-    authors: "Castro Castro, C.; Sánchez Oñate, A.; Bruna Jofré, D.; Fernández Vega, D.",
-    meta: "Actualidades Investigativas en Educación · 2025",
-    doi: "10.15517/qs783m72",
-    resumen: "Estudio correlacional sobre TPACK y competencias digitales en docentes universitarios de psicología en Chile.",
-    problema: "No hay claridad sobre cómo se relacionan las dimensiones del TPACK con las competencias digitales del profesorado en un área humanista."
-  },
-  {
-    title: "Mathematics Teachers' Knowledge for Teaching with Digital Technologies: A Systematic Review",
-    authors: "Padilla-Escorcia, I. A.; García-Rodríguez, M. L.; Aguilar-González, Á.",
-    meta: "Education Sciences · 2025",
-    doi: "10.3390/educsci15121598",
-    resumen: "Revisión sistemática (2010–2025) que compara los marcos TPACK y MTSK en la enseñanza de matemáticas con tecnología.",
-    problema: "TPACK y MTSK abordan de forma fragmentada la dimensión tecnológica y la disciplinar del conocimiento docente."
-  },
-  {
-    title: "Digital competence for sustainable education of pre-service teachers: a systematic literature review",
-    authors: "Zhang, L.; Yang, C.; Zheng, Y.",
-    meta: "Frontiers in Psychology · 2025",
-    doi: "10.3389/fpsyg.2025.1710983",
-    resumen: "Revisión sistemática (2014–2024) sobre la competencia digital de docentes en formación inicial.",
-    problema: "Persisten limitaciones metodológicas y falta de sistematización sobre marcos y métodos de medición de la competencia digital docente."
-  },
-  {
-    title: "How digitalised are vocational teachers?",
-    authors: "Cattaneo, A. A. P.; Antonietti, C.; Rauseo, M.",
-    meta: "Computers & Education · 2022",
-    doi: "10.1016/j.compedu.2021.104358",
-    resumen: "Diagnóstico de competencia digital en 1,692 docentes de formación profesional (VET) suiza.",
-    problema: "Se desconoce con precisión el nivel real de digitalización de los docentes VET y los factores que lo explican."
-  },
-  {
-    title: "An empirical study on the evaluation and influencing factors of digital competence of Chinese teachers for TVET",
-    authors: "Xin, Y.; Tang, Y.; Mou, X.",
-    meta: "PLOS ONE · 2024",
-    doi: "10.1371/journal.pone.0310187",
-    resumen: "Construye y valida un sistema estándar de competencia digital para 2,514 docentes de TVET en China.",
-    problema: "China carece de un sistema estandarizado para medir la competencia digital de sus docentes de TVET."
-  },
-  {
-    title: "How do vocational teachers use technology?",
-    authors: "Cattaneo, A. A. P.; Antonietti, C.; Rauseo, M.",
-    meta: "Vocations and Learning · 2025",
-    doi: "10.1007/s12186-025-09359-4",
-    resumen: "Analiza el uso real de 21 tecnologías educativas por docentes VET suizos según su perfil de enseñanza.",
-    problema: "El uso de tecnologías educativas varía por perfil docente, sin claridad sobre cuánto lo explican la competencia y la utilidad percibidas."
-  },
-  {
-    title: "TPACK Proficiency among Vocational High School Teachers",
-    authors: "Kawet, R. S. S. I.; Mahendra, I. G. B.; Tampang, B. L.; Memah, V. F.",
-    meta: "Journal of Education Technology · 2025",
-    doi: "10.23887/jet.v9i4.102632",
-    resumen: "Compara el dominio del TPACK entre docentes de escuelas vocacionales públicas y privadas en Indonesia.",
-    problema: "La implementación del TPACK es desigual entre instituciones públicas y privadas, condicionada por el apoyo institucional."
-  },
-  {
-    title: "Examining Agricultural Teachers' TPACK Competencies",
-    authors: "Villareal, N. K. B.; Homillano, M. L.",
-    meta: "Asian Journal of Education and Social Studies · 2024",
-    doi: "10.9734/ajess/2024/v50i121692",
-    resumen: "Examina la relación entre características demográficas y niveles de TPACK en docentes de agricultura filipinos.",
-    problema: "El conocimiento de contenido es el más débil del TPACK docente, y decrece con los años de experiencia."
-  },
-  {
-    title: "Development of the teacher's TPACK from the Lesson Study: A systematic review",
-    authors: "Jiménez Sierra, Á. A.; Ortega Iglesias, J. M.; Cabero-Almenara, J.; Palacios-Rodríguez, A.",
-    meta: "Frontiers in Education · 2023",
-    doi: "10.3389/feduc.2023.1078913",
-    resumen: "Revisión sistemática sobre el desarrollo del TPACK docente a través de la metodología Lesson Study.",
-    problema: "Las capacitaciones tecnocéntricas tradicionales no integran bien contenido, pedagogía y tecnología."
-  },
-  {
-    title: "Diagnosis of TPACK in Elementary School Teachers: Colombian Caribbean",
-    authors: "Jiménez Sierra, Á.; Ortega Iglesias, J.; Palacios-Rodríguez, A.",
-    meta: "Education Sciences · 2024",
-    doi: "10.3390/educsci14091013",
-    resumen: "Estudio de caso sobre el TPACK de ocho docentes de primaria del Caribe colombiano tras un programa de Lesson Study.",
-    problema: "El TPACK inicial de estos docentes requiere fortalecerse en un contexto de recursos limitados."
-  },
-  {
-    title: "Evaluation of digital competencies: instrument for vocational teacher training",
-    authors: "Sänger, N.",
-    meta: "Intl. Journal of Vocational Education Studies · 2024",
-    doi: "10.14361/ijves-2024-010203",
-    resumen: "Examina críticamente los enfoques de evaluación de competencias digitales basados en TPACK en formación vocacional.",
-    problema: "Los enfoques actuales presentan limitaciones conceptuales y no existe un instrumento propio para este contexto."
-  },
-  {
-    title: "Teachers' Readiness in Integrating Technology through TPACK-ICT: Papua, Indonesia",
-    authors: "Tanta, T.; Satar, S.; Nurbaya, N.; Listiani, H.",
-    meta: "Jurnal Iqra': Kajian Ilmu Pendidikan · 2025",
-    doi: "10.25217/ji.v10i3.6676",
-    resumen: "Mide el nivel de competencia TPACK-ICT de docentes en la región de Papúa, Indonesia.",
-    problema: "Los docentes muestran menor dominio en conocimiento de contenido y tecnológico que en lo pedagógico."
-  },
-  {
-    title: "Iraqi Kurdish EFL teachers' beliefs about TPACK",
-    authors: "Ali, S. S.; Mohammadzadeh, B.",
-    meta: "Frontiers in Psychology · 2022",
-    doi: "10.3389/fpsyg.2022.969195",
-    resumen: "Examina las creencias sobre TPACK de docentes de inglés kurdo-iraquíes según su experiencia y formación.",
-    problema: "Las creencias sobre el propio conocimiento tecnológico-pedagógico-disciplinar dependen de la experiencia y formación docente."
-  },
-  {
-    title: "Evaluating the effectiveness of a TPACK-based training program",
-    authors: "Diamah, A.; Rahmawati, Y.; Paristiowati, M.; Fitriani, E.; Irwanto, I.; Dobson, S.; Sevilla, D.",
-    meta: "Frontiers in Education · 2022",
-    doi: "10.3389/feduc.2022.897447",
-    resumen: "Evalúa la efectividad de un programa de capacitación basado en TPACK para futuros docentes.",
-    problema: "No hay evidencia suficiente sobre si estos programas mejoran la percepción del propio conocimiento TPACK."
-  },
-  {
-    title: "The Technological-Pedagogical Knowledge for In-Service Teachers in Primary Education: SLR",
-    authors: "Paidicán Soto, M. A.; Arredondo Herrera, P. A.",
-    meta: "Contemporary Educational Technology · 2022",
-    doi: "10.30935/cedtech/11813",
-    resumen: "Revisión sistemática sobre TPACK en docentes de primaria en servicio, a partir de más de 600 artículos identificados.",
-    problema: "La producción científica sobre TPACK en educación primaria es aún muy limitada, aunque creciente."
-  },
-  {
-    title: "Conocimiento técnico pedagógico del contenido (TPACK) en Iberoamérica",
-    authors: "Paidicán, M. A.; Arredondo, P. A.",
-    meta: "Revista Andina de Educación · 2023",
-    doi: "10.32719/26312816.2022.6.2.9",
-    resumen: "Revisión bibliográfica de 22 artículos sobre la producción del modelo TPACK en el contexto iberoamericano.",
-    problema: "La investigación sobre TPACK en Iberoamérica es marginal frente a la producción científica global."
+    "title": "Emerging Engineering Education in China",
+    "authors": "Zuo, D.; Samuel, M.; Tan, S. Y.",
+    "meta": "International Journal of Engineering Pedagogy · 2025",
+    "doi": "10.3991/ijep.v15i2.53627",
+    "resumen": "Esta revisión sistemática de la literatura (RSL) profundiza en las tendencias y desafíos actuales de la investigación en artículos relacionados con la Educación en Ingeniería Emergente (EEE) de China, según lo indexado por la Web of Science (WOS). Este estudio se centra en tres preguntas de investigación: 1) ¿Cuáles son las tendencias actuales de investigación basadas en la literatura existente? 2) ¿Cuál es el estado actual de desarrollo de las disciplinas de ingeniería emergentes de China? y 3) ¿Cuáles son las futuras líneas de investigación? Al examinar el estado actual de desarrollo de la EEE de China, este estudio revisó temas como el desarrollo de las políticas y prácticas de enseñanza de la EEE, así como los desafíos y problemas relacionados. Las futuras líneas de investigación sugeridas enfatizan la importancia de la institucionalización de la Investigación en Ingeniería Emergente (EER), fomentando redes de colaboración y diálogos globales que cierren la brecha entre la investigación teórica y las aplicaciones prácticas, adoptando modelos y prácticas innovadoras, integrando nuevos principios en los currículos actuales, evaluando intervenciones y programas educativos y explorando enfoques interdisciplinarios. Esta revisión ofrece información sobre el estado actual de la educación en ingeniería en China y destaca las futuras líneas de investigación para abordar nuevos desafíos y oportunidades en este campo.",
+    "problema": "Falta de una revisión sistemática sobre la educación en ingeniería emergente en China y sus principales desafíos.",
+    "solucion": "Analizan 23 artículos científicos para identificar tendencias, avances, dificultades y futuras líneas de investigación.",
+    "enfoque": "Cualitativo, mediante revisión sistemática de literatura científica.",
+    "diseno": "Documental, basado en una revisión sistemática de artículos publicados entre 2017 y 2024.",
+    "instrumento": "Matriz de búsqueda, selección y análisis de artículos de la base de datos Web of Science (WoS), siguiendo criterios de inclusión y exclusión.",
+    "resultado": "Identifican la necesidad de innovar en la enseñanza, integrar tecnologías emergentes, fortalecer la formación práctica e interdisciplinaria y vincular la teoría con las necesidades de la industria."
   }
 ];
 
@@ -886,6 +812,11 @@ function openModal(i) {
   document.getElementById('modal-doi').innerHTML = 'DOI: <a href="https://doi.org/' + a.doi + '" target="_blank" rel="noopener">doi.org/' + a.doi + '</a>';
   document.getElementById('modal-resumen').textContent = a.resumen;
   document.getElementById('modal-problem-text').textContent = a.problema;
+  document.getElementById('modal-solucion').textContent = a.solucion;
+  document.getElementById('modal-enfoque').textContent = a.enfoque;
+  document.getElementById('modal-diseno').textContent = a.diseno;
+  document.getElementById('modal-instrumento').textContent = a.instrumento;
+  document.getElementById('modal-resultado').textContent = a.resultado;
   overlay.classList.add('open');
   closeBtn.focus();
 }
